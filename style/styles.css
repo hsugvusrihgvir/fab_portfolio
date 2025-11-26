@@ -6,18 +6,18 @@
 
     /* светлая тема — мягкие, теплые */
     --bg: #73838a; /* общий фон */
-    --bg2: #4a6c26;
-    --bg3: #afbaae;
+    --bg2: #5d7e5c;
+    --bg3: #97999a;
     --nav-bg: #587c8f;
     --nav-fg: #E5E6E1;
     --fg: #3A3A32;           /* базовый текст (не угольно-чёрный) */
     --fg-soft: #4A4A42;      /* чуть контрастнее, для заголовков */
-    --muted: #487047;        /* подписи/вторичный текст */
+    --muted: #43515a;        /* подписи/вторичный текст */
     --link: #6EA9C9;         /* спокойная небесная ссылка */
     --link-hover: #5A97B8;   /* ховер без резкой насыщенности */
     --border: #ffffff;       /* деликатные границы/разделители */
 
-    --card: #dfe7ec;         /* карточки */
+    --card: rgb(233, 241, 236);         /* карточки */
     --card-soft: #dfe8df;    /* мягкие блоки/панели */
 
     --accent: #8EB9D4;       /* акцентные элементы */
@@ -38,6 +38,8 @@
     --glass-blur: 14px;
     --glass-radius: 18px;
     --glass-shadow: 0 8px 30px rgba(0,0,0,.12);
+
+    --main-bg: rgba(60, 69, 83, 0.82);
 }
 
 html, body {
@@ -45,11 +47,45 @@ html, body {
 }
 
 html{
-    background: linear-gradient(
-            to bottom,
-            var(--bg2),
-            var(--bg3)
-    );
+    background-image:
+            url("../images/noise.avif"),
+            linear-gradient(
+                    to bottom,
+                    var(--bg2) 15%,
+                    var(--bg3) 30%,
+                    var(--bg3) 100%
+            );
+    background-repeat: repeat, no-repeat;
+
+    /* шум мягко накладывается на градиент */
+    background-blend-mode: soft-light, normal;
+
+}
+
+@media (max-width: 1100px) {
+    html{
+        background-image:
+                url("../images/noise.avif"),
+                linear-gradient(
+                        to bottom,
+                        var(--bg2) 10%,
+                        var(--bg3) 20%,
+                        var(--bg3) 100%
+                );
+    }
+}
+
+@media (max-width: 877px) {
+    html{
+        background-image:
+                url("../images/noise.avif"),
+                linear-gradient(
+                        to bottom,
+                        var(--bg2) 5%,
+                        var(--bg3) 10%,
+                        var(--bg3) 100%
+                );
+    }
 }
 
 body{
@@ -68,8 +104,8 @@ body{
     display: flex;
     flex-direction: column;
 }
-main { flex: 1;
-    background: rgba(255, 255, 255, 0.17);
+main {
+    flex: 1;
 }
 
 
@@ -245,26 +281,39 @@ main { flex: 1;
     grid-area: main;
 }
 
+@media (max-width: 700px) {
+    .main {
+        width: 80%;
+    }
+}
+
 
 .card{
-    background: linear-gradient(
-            135deg,
-            rgba(191, 202, 216, 0.22),
-            rgba(255,255,255,.06)
-    );
+    background: var(--card);
     padding: var(--space-md);                /* базовые внутренние отступы */
     margin-top: 20px;
     min-width: 0;                            /* чтобы длинный текст не ломал сетку */
-    transition: transform .2s ease, box-shadow .2s ease;
-
-    border: 1px solid var(--glass-border);
+    background: linear-gradient(
+            135deg,
+            rgba(180, 255, 204, 0.2),
+            rgba(194, 255, 218, 0.1)
+    );
     border-radius: var(--glass-radius);  /* хочешь прямоугольные — поставь 0 */
     box-shadow: var(--glass-shadow);
 
-    backdrop-filter: blur(10px) saturate(120%);
-    -webkit-backdrop-filter: blur(10px) saturate(120%);
+    /* вместо текущего background-градиента: */
+    background: rgba(255, 255, 255, 0.16);  /* почти прозрачный белый */
+    /* если хочешь лёгкий градиент — поверх: */
+    /* background-image: linear-gradient(135deg, rgba(255,255,255,0.32), rgba(255,255,255,0.12)); */
+
+    border: 1px solid rgba(255,255,255,0.6);   /* тонкая светлая рамка */
+
+    backdrop-filter: blur(18px) saturate(130%);
+    -webkit-backdrop-filter: blur(18px) saturate(130%);
+
 }
 
+/* внутренний мягкий свет */
 .card::after{
     content:"";
     position:absolute;
@@ -272,9 +321,11 @@ main { flex: 1;
     border-radius:inherit;
     pointer-events:none;
     box-shadow: inset 0 1px 0 rgba(255,255,255,.5);
-    opacity:.8;
+    opacity: .35;
 }
 .card{ position:relative; }
+
+
 
 /* Общая база для всех заголовков внутри карточек */
 .card :is(h1, h2, h3, h4, h5, h6){
@@ -286,7 +337,7 @@ main { flex: 1;
 
 /* Большие заголовки — muted, но контрастные и по центру */
 .card h1{
-    color: var(--muted);
+    color: var(--nav-fg);
     font-size: clamp(20px, 1.6vw + .5rem, 26px);
     font-weight: 700;
     text-align: center;
@@ -303,31 +354,22 @@ main { flex: 1;
     margin-bottom: .8rem;
 }
 
-/* Средние заголовки — fg-soft */
-.card h3{
-    color: var(--fg-soft);
-    font-size: clamp(16px, 1vw + .35rem, 20px);
-    font-weight: 600;
-    text-align: left;
-    margin-bottom: .6rem;
-}
 
-.card h4{
-    color: var(--fg-soft);
-    font-size: clamp(15px, .8vw + .3rem, 18px);
-    font-weight: 600;
-    text-align: left;
-    margin-bottom: .5rem;
-}
 
-.card h5{
-    color: var(--fg);
-    font-size: clamp(14px, .6vw + .25rem, 16px);
-    font-weight: 600;
-    text-align: left;
-    margin-bottom: .4rem;
-}
+/* полупрозрачная картинка-фон */
+#about-card::before{
+    content: "";
+    position: absolute;
+    inset: 0;                  /* растянуть на всю карточку */
 
+    background-image: url("../images/bg1.png");
+    background-size: cover;    /* картинка покрывает всю карточку */
+    background-position: center;
+    background-repeat: no-repeat;
+
+    opacity: 0.5;              /* 50% прозрачность */
+    z-index: -1;               /* фон под контентом */
+}
 
 .two-col-layout{
     display: grid;
@@ -336,12 +378,12 @@ main { flex: 1;
     align-items: stretch;
 }
 
-@media (min-width: 800px){
+@media (min-width: 1000px){
     .two-col-layout{
         grid-template-columns: 1fr 1fr;
     }
 }
-@media (min-width: 1000px){
+@media (min-width: 1200px){
     .two-col-layout{
         grid-template-columns: 2fr 3fr;
     }
@@ -357,12 +399,11 @@ main { flex: 1;
     inline-size: min(100%, 320px);  /* вот это и делает его "нормальным" */
     aspect-ratio: 4 / 3;            /* держим красивую форму */
     object-fit: cover;
+    background: rgba(255, 255, 255, 0.33);
 
     margin: .75rem auto 1rem;
     padding: .35rem;
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 1rem;
+    border-radius: 0;
     box-shadow: 0 8px 18px rgba(0,0,0,.12);
 }
 
@@ -376,112 +417,223 @@ main { flex: 1;
 }
 
 
+.profile-name{
+    margin: .3rem 0 .4rem;
+    font-size: clamp(20px, 1.5vw + .5rem, 26px);
+    font-weight: 700;
+    letter-spacing: .03em;
+    color: var(--fg-soft);
+    text-align: center;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.8);
+    position: relative;
+}
+
+.profile-name::after{
+    content: "";
+    display: block;
+    width: 60%;
+    height: 2px;
+    margin: .4rem auto 0;
+    border-radius: 999px;
+    background: linear-gradient(
+            90deg,
+            transparent,
+            rgba(72,112,71,0.75),
+            transparent
+    );
+    opacity: .9;
+}
+
+/* Группа — маленький стеклянный бейдж под именем */
+.profile-text.profile-tag{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-top: .1rem;
+    padding: .18rem .9rem;
+
+    border-radius: 999px;
+    background: rgba(255,255,255,0.9);
+    border: 1px solid rgba(255,255,255,0.95);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+
+    font-size: .8rem;
+    text-transform: uppercase;
+    letter-spacing: .14em;
+    color: var(--muted);
+}
+
 .about-list{
     display: grid;
     gap: var(--space-lg);
+    grid-template-columns: 1fr;
+    align-items: stretch;
+    margin-top: 1rem;
 }
 
-@media (min-width: 1600px){
+@media (min-width: 737px){
     .about-list{
-        grid-template-columns: repeat(2, minmax(0, 1fr))
+        grid-template-columns: 1fr 1fr;
     }
 }
 
+@media (min-width: 1000px){
+    .about-list{
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (min-width: 1400px){
+    .about-list{
+        grid-template-columns: 1fr 1fr;
+    }
+}
+/* стеклянные плитки "Где меня найти" и "Стек" */
 .about-item{
-    background: linear-gradient(100deg,
-    var(--card-soft),
-    var(--card));
-    border: 1px solid var(--border);
-    padding: var(--space-md);
-}
-
-.about-title,
-.about-subtitle{
-    margin-top: 0;
-    text-align: center;
-    color: var(--muted);
-}
-
-.about-text{
-    margin: .5rem 0 1rem;
-    text-align: center;
-
-}
-
-.about-links{
+    position: relative;
     display: flex;
-    flex-wrap: wrap;
-    gap: .5rem;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: space-between;
+
+    padding: 1.5rem 1.75rem 1.75rem;
+    border-radius: 26px;
+    border: 1px solid rgba(255,255,255,0.75);
+
+    /* почти прозрачное стекло */
+    background: linear-gradient(
+            135deg,
+            rgba(255, 255, 255, 0.51),
+            rgba(255, 255, 255, 0.21)
+    );
+    box-shadow: 0 16px 32px rgba(15, 23, 42, 0.18);
+
+    /* вот тут как раз blur */
+    backdrop-filter: blur(22px) saturate(130%);
+    -webkit-backdrop-filter: blur(22px) saturate(130%);
+
+    overflow: hidden; /* чтобы блик не вылезал за края */
 }
 
-/* если .btn у тебя уже есть — оставь только модификаторы */
-.btn{
-    display: inline-block;
-    font: inherit;
-    padding-inline: 1rem;
-    padding-block: max(.5rem, calc((44px - 1em)/2));
-    border-radius: 999px;
-    border: 1px solid var(--border);
-    text-decoration: none;
-    color: var(--fg);
-    background: var(--accent-soft);
-    box-shadow: var(--shadow);
-    transition: transform .2s ease, background-color .2s ease;
+/* лёгкий блик, чтобы был реальный glass-вайб */
+.about-item::before{
+    content: "";
+    position: absolute;
+    inset: -40% -40% auto;
+    background: radial-gradient(
+            circle at top,
+            rgba(255,255,255,0.65),
+            transparent 60%
+    );
+    opacity: 0.45;
+    pointer-events: none;
 }
-.btn:hover{
-    background: var(--accent);
-    transform: translateY(-1px);
-}
-.btn--ghost{ background: transparent; }
-.btn--soft{ background: var(--accent-soft); }
 
-.chips{
+/* заголовки внутри этих плиток — один цвет и размер */
+.about-item .about-title h1,
+.about-item .about-subtitle h2{
+    margin: 0 0 .75rem;
+    text-align: center;
+
+    color: var(--muted);                        /* тот же зелёный, что везде */
+    font-family: "Manrope","Segoe UI",sans-serif;
+    font-weight: 700;
+    font-size: clamp(20px, 1.2vw + .3rem, 22px);
+    letter-spacing: .02em;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.7); /* лёгкий блик, стеклянный вайб */
+}
+/* Заголовки "Где меня найти" и "Стек" — один стиль */
+.about-title,
+.about-subtitle {
+    margin: 0 0 .75rem;
+    text-align: center;
+    color: var(--muted);          /* тот же зелёный, что и в остальном дизайне */
+    font-family: "Manrope", "Segoe UI", Roboto, Arial, sans-serif;
+    font-weight: 700;
+    font-size: clamp(20px, 1.2vw + .3rem, 22px);
+    letter-spacing: .02em;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.7);
+}
+
+/* текст под заголовком — чуть мягче */
+.about-text {
+    margin: 0 0 1.1rem;
+    text-align: center;
+    color: var(--fg-soft);
+}
+
+/* чипсы и подпись оставляем, только чуть вычищаем вид */
+.chips {
     list-style: none;
     display: flex;
     flex-wrap: wrap;
-    gap: .5rem;
-    padding: 0;
-    margin: .75rem 0 0;
+    gap: .55rem .8rem;
     justify-content: center;
+    padding: 0;
+    margin: .9rem 0 0;
 }
-.chip{
-    background: var(--card);
-    border: 1px solid var(--border);
-    padding: .25rem .6rem;
+
+.chip {
+    padding: .25rem .8rem;
     border-radius: 999px;
     font-size: .95rem;
+
+    background: rgba(255,255,255,0.96);
+    border: 1px solid rgba(255,255,255,0.95);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
 }
 
-.about-note{
-    color: var(--muted);
-    font-size: .95rem;
-    text-align: center;
+.about-note {
+    margin-top: 1rem;
     margin-bottom: 0;
+    text-align: center;
+    font-size: .9rem;
+    color: var(--muted);
 }
 
-.about-cat{
-    display: block;
-    width: 100%;        /* тянемся вместе с блоком по ширине */
-    max-width: 300px;
-    height: auto;       /* пока можно — держим пропорции */
-    max-height: 150px;  /* максимум по высоте */
-    margin-inline: auto;
+.about-links{
+    display: grid;
+    /* если ширины хватает — две колонки, если нет — одна */
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: .75rem;
+    justify-content: center;
 }
 
+/* Спокойные кнопки GitHub / почта внутри "Где меня найти" */
+.about-btn{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 
+    min-width: 120px;
+    padding: 0.5rem 1.4rem;
+    border-radius: 999px;
 
+    font-weight: 500;
+    letter-spacing: .01em;
 
-.mini-photo{
-    display: block;
-    max-inline-size: 100%;
-    inline-size: min(100%, 320px);
-    aspect-ratio: 2 / 5;
-    object-fit: cover;
+    color: var(--fg-soft);
+    background: rgba(255,255,255,0.92);
+    border: 1px solid rgba(255,255,255,0.96);
+    box-shadow: 0 6px 14px rgba(0,0,0,0.08);
 
-    margin: .75rem auto 1rem;
-    padding: .35rem;
-    border-radius: 0;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
+    text-decoration: none;
+    transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+    margin: .5rem .5rem .5rem .5rem;
+}
+
+.about-btn:hover{
+    transform: translateY(-1px);
+    background: rgba(255,255,255,1);
+    box-shadow: 0 10px 24px rgba(0,0,0,0.12);
+}
+
+.about-btn:active{
+    transform: translateY(0);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
 }
 
 .borzoi-layout{
@@ -506,6 +658,43 @@ main { flex: 1;
     margin: 0;           /* убираем auto-центрирование */
     padding: 0;          /* чтобы не сужало ячейки */
     border-radius: .6rem;
+}
+
+
+.footer{
+    position: relative;
+    margin-top: 3rem;
+
+    padding: .85rem 1.5rem;
+    padding-bottom: max(.85rem, env(safe-area-inset-bottom));
+
+    text-align: center;
+    font-size: .9rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+
+    color: var(--fg-soft);
+
+    /* стеклянная плашка */
+    background: linear-gradient(
+            180deg,
+            rgba(255,255,255,0.22),
+            rgba(255,255,255,0.10)
+    );
+    border-top: 1px solid rgba(255,255,255,0.85);
+
+    backdrop-filter: blur(14px) saturate(130%);
+    -webkit-backdrop-filter: blur(14px) saturate(130%);
+
+    box-shadow:
+            0 -8px 24px rgba(0,0,0,0.18),
+            0 -1px 0 rgba(255,255,255,0.5) inset;
+}
+
+/* чтобы текст не лип к краю на очень широких экранах */
+.footer span,
+.footer{
+    font-family: "Manrope","Segoe UI",sans-serif;
 }
 
 
