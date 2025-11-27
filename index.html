@@ -5,12 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <title>Chill Gallery — привет</title>
     <link rel="stylesheet" href="style/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400..800&display=swap" rel="stylesheet">
 
 </head>
 
 
-<body>
+<body class="page">
 
 
 <header class="header">
@@ -22,7 +24,7 @@
             <span class="visually-hidden">Меню</span>
         </button>
         <ul class="nav-list"  id="nav-list">
-            <li><a class="nav-link" href="index.html">главная</a></li>
+            <li><a class="nav-link active" href="index.html">главная</a></li>
             <li><a class="nav-link" href="pages/news.html">новости</a></li>
             <li><a class="nav-link" href="pages/practices.html">практики</a></li>
             <li><a class="nav-link" href="pages/goods.html">товары</a></li>
@@ -35,7 +37,7 @@
     <div class="two-col-layout">
         <section class="card">
             <div class="profile-list" role="list">
-                <article class="profile-header">
+                <article>
                     <h1>Автор</h1>
                     <img class="profile-photo" src="images/photo.png" alt="Фото автора" width="400" height="300">
                     <h2 class="profile-name">Емельянова Дарья Олеговна</h2>
@@ -96,10 +98,10 @@
     <section class="card borzoi">
         <h1>Картинки с борзыми</h1>
         <div class="borzoi-layout">
-            <img class="photo" src="images/borzoi/1.jpg" alt="Забавное фото" width="200" height="500">
-            <img class="photo" src="images/borzoi/2.jpg" alt="Забавное фото" width="200" height="500">
-            <img class="photo" src="images/borzoi/3.jpg" alt="Забавное фото" width="200" height="500">
-            <img class="photo" src="images/borzoi/4.jpg" alt="Забавное фото" width="200" height="500">
+            <img class="photo" src="images/borzoi/1.jpg" alt="Забавное фото" width="200" height="500" loading="lazy">
+            <img class="photo" src="images/borzoi/2.jpg" alt="Забавное фото" width="200" height="500" loading="lazy">
+            <img class="photo" src="images/borzoi/3.jpg" alt="Забавное фото" width="200" height="500" loading="lazy">
+            <img class="photo" src="images/borzoi/4.jpg" alt="Забавное фото" width="200" height="500" loading="lazy">
         </div>
 
     </section>
