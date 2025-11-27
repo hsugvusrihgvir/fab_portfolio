@@ -8,11 +8,11 @@
     --bg2: #5d7e5c;
     --bg3: #97999a;
     --nav-fg: #E5E6E1;
-    --fg: #3A3A32;           /* базовый текст (не угольно-чёрный) */
-    --fg-soft: #4A4A42;      /* чуть контрастнее, для заголовков */
-    --muted: #43515a;        /* подписи/вторичный текст */
+    --fg: #3A3A32;
+    --fg-soft: #4A4A42;
+    --muted: #43515a;
 
-    --card: rgb(233, 241, 236);         /* карточки */
+    --card: rgb(233, 241, 236);
 
 
     --space-md: 16px;
@@ -38,9 +38,7 @@ html{
                     var(--bg3) 30%,
                     var(--bg3) 100%
             );
-    background-repeat: repeat, no-repeat;
-
-    /* шум мягко накладывается на градиент */
+    background-repeat: repeat, no-repeat; /* */
     background-blend-mode: soft-light, normal;
 
 }
