@@ -73,7 +73,26 @@
 
     </section>
 </main>
-<footer class="footer">© 2025 chill.gallery</footer>
+<footer class="footer">© 2025 чёта</footer>
+
+<script>
+    const nav = document.querySelector('.nav');
+    const btn = document.querySelector('.nav-toggle');
+
+    if (nav && btn) {
+        btn.addEventListener('click', () => {
+            const isOpen = nav.classList.toggle('open');
+            btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+
+        nav.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                nav.classList.remove('open');
+                btn.setAttribute('aria-expanded', 'false');
+            });
+        });
+    }
+</script>
 
 </body>
 </html>

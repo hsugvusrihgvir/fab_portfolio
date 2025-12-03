@@ -53,7 +53,6 @@
         <section class="card" id="about-card">
             <h1>Обо мне</h1>
             <div class="about-list">
-                <!-- Блок "где я" -->
                 <article class="about-item" >
                     <h2 class="about-title">Где меня найти</h2>
 
@@ -74,12 +73,10 @@
                     </div>
                 </article>
 
-                <!-- Блок "что изучаю" -->
                 <article class="about-item">
-                    <h2 class="about-subtitle">Стек</h2>
+                    <h2 class="about-subtitle">Навыки</h2>
 
                     <ul class="chips">
-                        <!-- подправь под себя -->
                         <li class="chip">Python</li>
                         <li class="chip">Python</li>
                         <li class="chip">Python</li>
@@ -156,7 +153,6 @@
             btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
         });
 
-        // по желанию: закрывать меню после клика по пункту
         nav.querySelectorAll('.nav-link').forEach(link => {
             link.addEventListener('click', () => {
                 nav.classList.remove('open');

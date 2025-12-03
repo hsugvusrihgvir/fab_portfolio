@@ -98,9 +98,6 @@ main {
 }
 
 
-/* БАЗОВЫЕ ЭЛЕМЕНТЫ */
-
-/* расположение карточек */
 .two-col-layout{
     display: grid;
     grid-template-columns: 1fr;

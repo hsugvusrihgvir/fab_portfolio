@@ -40,10 +40,10 @@
 
     <section class="contacts-layout">
         <section class="contacts">
-            <img class="contact-photo" src="../images/contact-400.jpg"
-                 width="320" height="240" alt="Пёс приветствует">
-            <p><strong>E-mail:</strong> <a class="contact-link" href="mailto:hello@chill.gallery">hello@chill.gallery</a></p>
-            <p><strong>Telegram:</strong> <a class="contact-link" href="#">@chill_gallery</a></p>
+            <img class="contact-photo" src="../images/c.jpg"
+                 width="320" height="240" alt="Сабака">
+            <p><strong>Почта:</strong> <a class="contact-link" href="mailto:aaa@gmail.com">aaa@gmail.com</a></p>
+            <p><strong>Telegram:</strong> <a class="contact-link" href="#">@aaa</a></p>
         </section>
 
         <section class="contact-form">
@@ -84,7 +84,28 @@
     </section>
 </main>
 
-<footer class="footer">© 2025 chill.gallery</footer>
+<footer class="footer">© 2025 чёта</footer>
+
+
+<script>
+    const nav = document.querySelector('.nav');
+    const btn = document.querySelector('.nav-toggle');
+
+    if (nav && btn) {
+        btn.addEventListener('click', () => {
+            const isOpen = nav.classList.toggle('open');
+            btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+
+        // по желанию: закрывать меню после клика по пункту
+        nav.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                nav.classList.remove('open');
+                btn.setAttribute('aria-expanded', 'false');
+            });
+        });
+    }
+</script>
 
 <script>
     const form = document.getElementById('contactForm');
@@ -132,7 +153,7 @@
             hasError = true;
         } else if (!validateEmail(emailValue)) {
             emailInput.classList.add('input-error');
-            errorEmail.textContent = 'Похоже, здесь опечатка';
+            errorEmail.textContent = 'НЕПРАВИЛЬНО';
             hasError = true;
         }
 
@@ -144,7 +165,7 @@
 
         if (!hasError) {
             form.reset();
-            alert('Спасибо! Сообщение отправлено (пока что просто всплывашкой).');
+            alert('Спасибо! Сообщение отправлено!!!!!.');
         }
     });
 </script>
